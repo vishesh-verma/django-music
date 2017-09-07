@@ -1,0 +1,8 @@
+<h1>This is the render funciton</h1>
+<ul>
+     {% for i in albums  %}
+     <li> <a href="{% url 'music:details' i.id %}"> {{i.artist}}</a></li>
+ <!--<li><a href="/music/{{i.id}}/">{{i.artist}}</a></li>
+//-->
+     {% endfor %}
+</ul>

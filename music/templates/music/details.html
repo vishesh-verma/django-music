@@ -1,0 +1,30 @@
+
+<h1>Album deatils</h1>
+<ul>
+  <li>{{album.artist}} </li>
+  {% if album.album_title%}
+      <li>{{album.album_title}}</l1>
+  {% else %}
+       <p>NO album title</p>
+  {%endif%}           
+</ul>
+<h1>list of Songs</h1>
+{% if album.song_set.all %}
+     <form action="{% url 'music:favorite' album.id %}" method="post">
+         {% csrf_token %}
+         {% for song in album.song_set.all %}
+             <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{song.id}}">
+             <label for="song{{ forloop.counter }}">
+               {{ song.song_title }}
+               {% if song.favorite  %}
+                       <p>favorite</p>
+               {% else %}
+                       <p>not favorite</P>
+               {% endif %}
+             </label><br>
+         {% endfor %}
+     <input type="submit" name="" value="favorite">
+     </form>
+  {% else %}
+        <p>No songs in this album</p>
+  {% endif %}
